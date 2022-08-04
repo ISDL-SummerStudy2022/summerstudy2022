@@ -21,3 +21,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+frontend/app/node_modules/.staging/@babel/compat-data-ebe16388/corejs2-built-ins.js
+
+
