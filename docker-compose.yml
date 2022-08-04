@@ -6,7 +6,7 @@ services:
         dockerfile: Dockerfile
     volumes:
       - ./frontend:/src
-    command: sh -c 'cd app && PORT=8080 yarn start'
+    command: sh -c 'cd app && PORT=80 yarn start'
     ports:
-      - '8080:8080'
+      - '80:80'
     stdin_open: true
