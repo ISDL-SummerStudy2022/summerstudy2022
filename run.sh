@@ -2,7 +2,7 @@
 
 # ディレクトリがある確認
 DIR="app"
-if [ ! -d $DIR ];then
+if [ -d $DIR ];then
   rm -rf $DIR
 fi
 
