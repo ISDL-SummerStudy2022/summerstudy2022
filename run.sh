@@ -1,8 +1,9 @@
 #! /bin/bash
 
 # ディレクトリがある確認
-DIR="app"
+DIR="front/app"
 if [ -d $DIR ];then
+echo "Directory exists."
   rm -rf $DIR
 fi
 
