@@ -1,0 +1,31 @@
+
+html {
+    -webkit-font-smoothing: antialiased; //safari
+    -moz-osx-font-smoothing: grayscale; // Firefox
+    text-rendering: optimizeLegibility;
+    height: 100%;
+  }
+  
+  body {
+    font-family: var(--family);
+    //@include g.font-size(16);
+    line-height: 1.5;
+    min-height: 100%;
+    letter-spacing: -0.03em;
+    //background-color: g.$palette-white;
+    background-color: var(--color-gray);
+    color: var(--color-black);
+  }
+  
+  /* link color
+  ------------------------------------------------------------*/
+  
+  a {
+    //color: g.$palette-black;
+    text-decoration: none;
+  }
+  img {
+    max-width: 100%;
+    vertical-align: bottom;
+  }
+  
