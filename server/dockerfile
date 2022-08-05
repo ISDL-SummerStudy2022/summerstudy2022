@@ -1,0 +1,9 @@
+FROM openjdk:17
+
+RUN microdnf install findutils
+
+# ワーキングディレクトリの設定
+WORKDIR /srv
+
+CMD ["sh" ,"init.sh"]
+
