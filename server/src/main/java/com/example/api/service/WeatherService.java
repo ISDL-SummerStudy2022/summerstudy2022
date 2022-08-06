@@ -19,7 +19,6 @@ public class WeatherService{
    * @return
    */
   public List<Weather> findAllWeatherData(){
-    
     return weatherRepository.findAll();
   }
 }

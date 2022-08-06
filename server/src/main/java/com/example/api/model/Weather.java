@@ -1,6 +1,6 @@
 package com.example.api.model;
 
-import java.sql.Timestamp;
+// import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,57 +8,33 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="weather")
+@Table(name="item")
+
 public class Weather {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
-    
-    private Integer location_id;
-    
-    private String name;
-    
-    private Integer temperature;
-    
-    private Integer humidity;
-    
-    private Timestamp date_time;
-    
-  public Integer getId() {
-    return id;
+    private String col1;
+    private String col2;
+    private String col3;
+
+    public String getCol1() {
+      return col1;
+    }
+    public void setCol1(String col1) {
+      this.col1 = col1;
+    }
+
+    public String getCol2() {
+      return col2;
+    }
+    public void setCol2(String col2) {
+      this.col2 = col2;
+    }
+
+    public String getCol3() {
+      return col3;
+    }
+    public void setCol3(String col3) {
+      this.col3 = col3;
+    }
   }
-  public void setId(Integer id) {
-    this.id = id;
-  }
-  public Integer getLocation_id() {
-    return location_id;
-  }
-  public void setLocation_id(Integer location_id) {
-    this.location_id = location_id;
-  }
-    
-        public String getName() {
-    return name;
-  }
-  public void setName(String name) {
-    this.name = name;
-  }
-  public Integer getTemperature() {
-    return temperature;
-  }
-  public void setTemperature(Integer temperature) {
-    this.temperature = temperature;
-  }
-  public Integer getHumidity() {
-    return humidity;
-  }
-  public void setHumidity(Integer humidity) {
-    this.humidity = humidity;
-  }
-  public Timestamp getDate_time() {
-    return date_time;
-  }
-  public void setDate_time(Timestamp date_time) {
-    this.date_time = date_time;
-  }   
-}
