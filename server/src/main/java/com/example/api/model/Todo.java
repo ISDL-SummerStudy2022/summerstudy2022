@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="item")
 
-public class Weather {
+public class Todo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String col1;

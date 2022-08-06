@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.model.Weather;
-import com.example.api.service.WeatherService;
+import com.example.api.model.Todo;
+import com.example.api.service.TodoService;
 
 @RestController
 public class TestController {
     @Autowired
-    WeatherService weatherService;
+    TodoService todoService;
 
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String test() {
@@ -21,12 +21,12 @@ public class TestController {
     }
 
     @RequestMapping(path = "/hello", method = RequestMethod.GET)
-    public List<Weather> hello() {
+    public List<Todo> hello() {
       // 気象データの取得
-      List<Weather> weatherDataList = weatherService.findAllWeatherData();
+      List<Todo> todoDataList = todoService.findAllTodoData();
       // model.addAttribute("weatherDataList", weatherDataList);
 
-      return weatherDataList;
+      return todoDataList;
     }
 
     @RequestMapping(path = "/test/json", method = RequestMethod.GET)

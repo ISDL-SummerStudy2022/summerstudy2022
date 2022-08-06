@@ -2,6 +2,7 @@ package com.example.api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.example.api.model.Weather;
+import com.example.api.model.Todo;
+
 @Repository
-public interface WeatherRepository extends JpaRepository<Weather, Integer> {}
+public interface TodoRepository extends JpaRepository<Todo, Integer> {}
