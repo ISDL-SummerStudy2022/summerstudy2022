@@ -1,0 +1,1 @@
+curl -X GET  -H 'Content-Type:application/json'  -d '[{"value1": "hogehoge", "value2": "hoge2"},{"value1": "hogehoge", "value2": "hoge2"}]'  localhost:8080/test/json
