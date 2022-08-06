@@ -1,8 +1,7 @@
 -- DB作成
 CREATE DATABASE testdb; 
+CREATE DATABASE tododb;
 
--- 作成したDBへ切り替え
-\c testdb
 
 -- ロールの作成
 -- CREATE ROLE testroot WITH LOGIN PASSWORD 'Password!';

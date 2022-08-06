@@ -9,10 +9,32 @@ CREATE TABLE  item (
   PRIMARY KEY (col1)
 );
 
--- -- 権限追加
--- GRANT ALL PRIVILEGES ON hogeschema.sample TO hoge;
+\c tododb
 
--- サンプルレコード作成
-INSERT INTO item VALUES('1111', '2221', '3331');
-INSERT INTO item VALUES('1112', '2222', '3332');
-INSERT INTO item VALUES('1113', '2223', '3333');
+CREATE TABLE  users (
+  id SERIAL NOT NULL,
+  name VARCHAR(30),
+  email VARCHAR(100),
+  password VARCHAR(100),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE genres(
+  id SERIAL NOT NULL,
+  genrename VARCHAR(30),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE  items (
+  id SERIAL NOT NULL,
+  userid INT,
+  text VARCHAR(300),
+  genreid INT,
+  priority INT,   
+  datetime DATE,
+  status BOOLEAN,
+  eventid VARCHAR(100),
+  foreign key (userid) references users(id) ,
+  foreign key (genreid) references genres(id),
+  PRIMARY KEY (id)
+);
