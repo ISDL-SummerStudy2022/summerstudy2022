@@ -1,8 +1,10 @@
 package com.example.api.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +16,9 @@ import com.example.api.service.TodoService;
 public class TestController {
     @Autowired
     TodoService todoService;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     @RequestMapping(path = "/todo/insert", method = RequestMethod.GET)
     public String testInsert() {
@@ -47,6 +52,19 @@ public class TestController {
       List<Todo> todoDataListSelect = todoService.findTodoDataListByCol1("1111");
 
       return todoDataListSelect;
+    }
+
+    @RequestMapping(path = "/hello/jdbc", method = RequestMethod.GET)
+    public String helloJDBC() {
+      System.out.println("*** JDBC Start. ***");
+      String sql = "select * from item";
+      List<Map<String, Object>> sqlResultList = jdbcTemplate.queryForList(sql);
+      sqlResultList.forEach(s -> {
+          System.out.println(s);
+      });
+      System.out.println("*** JDBC End. ***");
+
+      return "JDBC";
     }
 
     @RequestMapping(path = "/test/json", method = RequestMethod.GET)
