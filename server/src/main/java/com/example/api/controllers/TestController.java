@@ -15,6 +15,21 @@ public class TestController {
     @Autowired
     TodoService todoService;
 
+    @RequestMapping(path = "/todo/insert", method = RequestMethod.GET)
+    public String testInsert() {
+      return "testInsert";
+    }
+
+    @RequestMapping(path = "/todo/update", method = RequestMethod.GET)
+    public String testUpdate() {
+      return "testUpdate";
+    }
+
+    @RequestMapping(path = "/todo/delete", method = RequestMethod.GET)
+    public String testDelete() {
+      return "testDelete";
+    }
+
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String test() {
       return "ok from test.";
@@ -22,11 +37,16 @@ public class TestController {
 
     @RequestMapping(path = "/hello", method = RequestMethod.GET)
     public List<Todo> hello() {
-      // 気象データの取得
       List<Todo> todoDataList = todoService.findAllTodoData();
-      // model.addAttribute("weatherDataList", weatherDataList);
 
       return todoDataList;
+    }
+
+    @RequestMapping(path = "/hello/select", method = RequestMethod.GET)
+    public List<Todo> helloSelect() {
+      List<Todo> todoDataListSelect = todoService.findTodoDataListByCol1("1111");
+
+      return todoDataListSelect;
     }
 
     @RequestMapping(path = "/test/json", method = RequestMethod.GET)

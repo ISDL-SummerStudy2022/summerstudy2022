@@ -10,15 +10,23 @@ import com.example.api.repository.TodoRepository;
 @Service
 @Transactional
 public class TodoService{
-  
   @Autowired
   TodoRepository todoRepository;
-  
   /**
    * レコードを全件取得する。
    * @return
    */
   public List<Todo> findAllTodoData(){
     return todoRepository.findAll();
+  }
+  
+  /**
+   * 指定した都市のレコードを取得する。
+   * @param name
+   * @return
+   */
+  public List<Todo> findTodoDataListByCol1(String Col1){
+        
+    return todoRepository.findByCol1(Col1);
   }
 }
