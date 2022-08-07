@@ -55,15 +55,15 @@ public class TestController {
 
     }
 
-    // @RequestMapping(path = "/test", method = RequestMethod.GET)
-    // @ResponseBody
-    // public Example testJson() {
-    //   var examplePOJO = new Example();
-    //   examplePOJO.value1 = "foo";
-    //   examplePOJO.value2 = "bar";
-    //   System.out.println("testing1");
-    //   return examplePOJO;
-    // }
+    @RequestMapping(path = "/test", method = RequestMethod.GET)
+    @ResponseBody
+    public Example testJson() {
+      var examplePOJO = new Example();
+      examplePOJO.value1 = "foo";
+      examplePOJO.value2 = "bar";
+      System.out.println("testing1");
+      return examplePOJO;
+    }
 
     public class Example {
   		public String value1;
