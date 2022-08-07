@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.model.Todo;
 import com.example.api.model.UserInsert;
 import com.example.api.model.UserDelete;
 import com.example.api.model.UserSelect;
