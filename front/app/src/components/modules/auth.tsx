@@ -6,6 +6,7 @@
   signin(callback: VoidFunction) {
     fakeAuthProvider.isAuthenticated = true;
     // ここにログイン処理
+    console.log("Login")
     setTimeout(callback, 100); // fake async
   },
   signout(callback: VoidFunction) {

@@ -5,23 +5,20 @@ import classes from './LoginInput.module.scss';
 type Props = {
   // username: string;
   password: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
   typing: boolean;
   setTyping: React.Dispatch<React.SetStateAction<boolean>>;
-  onAdd: (text: string) => void;
 };
 
 export const PasswordInput: VFC<Props> = memo((props) => {
-  const {password, setText, typing, setTyping, onAdd } = props;
+  const {password, setPassword, typing, setTyping} = props;
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setText(e.target.value), [setText]);
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value), [setPassword]);
   
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (!password) return;
-    if (e.key !== 'Enter' || typing) return;
-    onAdd(password);
-    setText('');
-  };
+  // const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  //   if (!password) return;
+  //   setText(password)
+  // };
   
   return (
     <div className={classes.block}>
@@ -33,9 +30,9 @@ export const PasswordInput: VFC<Props> = memo((props) => {
         value={password}
         onChange={handleChange}
 
-        onKeyDown={handleKeyDown}
-        onCompositionStart={() => setTyping(true)}
-        onCompositionEnd={() => setTyping(false)}
+        // onKeyDown={handleKeyDown}
+        // onCompositionStart={() => setTyping(true)}
+        // onCompositionEnd={() => setTyping(false)}
         />
       </div>
     </div>

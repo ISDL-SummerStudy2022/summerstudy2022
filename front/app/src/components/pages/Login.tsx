@@ -15,19 +15,20 @@ export const Login = () => {
   const [Password, setPassword] = useState<string>('');
 
   const [typing, setTyping] = useState<boolean>(false);
-  const onAdd = useCallback(
-    (inputText: string) => {
-      setItems([...items, { key: getKey(), text: inputText, done: false }]);
-    },
-    [items]
-  );
+
+  
+  const onClickLogin = () => {
+    console.log(Username)
+    console.log(Password)
+  };
   return (
     <div className={classes.container}>
       <div className={classes.inner}>
         <div className={classes.main}>
           <h1 className={classes.heading}>Login</h1>
-          <LoginInput onAdd={onAdd} username={Username} setText={setUsername} typing={typing} setTyping={setTyping} />
-          <PasswordInput onAdd={onAdd} password={Password} setText={setPassword} typing={typing} setTyping={setTyping} />
+          <LoginInput username={Username} setUsername={setUsername} typing={typing} />
+          <PasswordInput password={Password} setPassword={setPassword} typing={typing} setTyping={setTyping} />
+          <div className={classes.blockBottom}><button className={classes.button} onClick={onClickLogin} type="button">Login </button></div>
         </div>
       </div>
     </div>
