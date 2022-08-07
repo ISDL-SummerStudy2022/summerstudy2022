@@ -1,6 +1,6 @@
 package com.example.api.controllers;
 
-import com.example.api.model.ItemInsert;
+import com.example.api.model.ItemEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -30,12 +30,12 @@ public class ItemController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     @ResponseBody
     public boolean responsejson2(
-        @RequestBody ItemInsert item) {
+        @RequestBody ItemEntity item) {
           System.out.println("*** JDBC Start. ***");
-          String sqlText  = "INSERT INTO items (userid,text,genreid,priority,datetime,status) "
+          String sqlText  = "INSERT INTO items (userID,text,genreID,priority,datetime,status) "
                     + "VALUES (?,?,?,?,?,?)";       
           try{
-            jdbcTemplate.update(sqlText,item.getuserid(),item.gettext(),item.getgenreid(),item.getpriority(),item.getdatetime(),true);
+            jdbcTemplate.update(sqlText,item.getuserID(),item.gettext(),item.getgenreID(),item.getpriority(),item.getdatetime(),true);
             return true;
           }
           catch (DataAccessException e)
@@ -48,11 +48,11 @@ public class ItemController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public boolean itemUpdate(
-      @RequestBody ItemInsert item) {
+      @RequestBody ItemEntity item) {
           System.out.println("*** JDBC Start. ***");
-          String sqlText = "UPDATE items SET "+ " userid = ? ,text = ? ,genreid = ? ,priority = ? ,datetime = ? ,status = ? " + "WHERE" + " id = ?;";   
+          String sqlText = "UPDATE items SET "+ " userID = ? ,text = ? ,genreID = ? ,priority = ? ,datetime = ? ,status = ? " + "WHERE" + " id = ?;";   
           try{
-            jdbcTemplate.update(sqlText,item.getuserid(),item.gettext(),item.getgenreid(),item.getpriority(),item.getdatetime(),item.getstatus(),item.getid());
+            jdbcTemplate.update(sqlText,item.getuserID(),item.gettext(),item.getgenreID(),item.getpriority(),item.getdatetime(),item.getstatus(),item.getitemID());
             return true;
           }
           catch (DataAccessException e)
@@ -65,11 +65,11 @@ public class ItemController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public boolean itemDelete(     
-      @RequestBody ItemInsert item) {
+      @RequestBody ItemEntity item) {
       System.out.println("*** JDBC Start. ***");
       String sqlText = "DELETE FROM items WHERE id = ?"; 
       try{
-        jdbcTemplate.update(sqlText,item.getid());
+        jdbcTemplate.update(sqlText,item.getitemID());
         return true;
       }
       catch (DataAccessException e)
@@ -81,7 +81,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/select", method = RequestMethod.POST)
-    public List<ItemInsert> itemSelect() {
+    public List<ItemEntity> itemSelect() {
       String sqlText = ""
       + "SELECT"
           + " *"
@@ -92,15 +92,15 @@ public class ItemController {
   List<Map<String, Object>> items = jdbcTemplate.queryForList(sqlText);
   
   // Userオブジェクト格納用のListを作成する。
-  List<ItemInsert> itemList = new ArrayList<ItemInsert>();
+  List<ItemEntity> itemList = new ArrayList<ItemEntity>();
   
   // 受け取ったMapのListをfor文で回し、各ユーザの値をUserオブジェクトに格納する。
   for(Map<String, Object> eachItem: items) {
-      ItemInsert item = new ItemInsert(
-               (int) eachItem.get("id")
-              ,(int) eachItem.get("userid")
+      ItemEntity item = new ItemEntity(
+               (int) eachItem.get("itemID")
+              ,(int) eachItem.get("userID")
               ,(String) eachItem.get("text")
-              ,(int) eachItem.get("genreid")
+              ,(int) eachItem.get("genreID")
               ,(int) eachItem.get("priority")
               ,(Date) eachItem.get("datetime")
               ,(boolean) eachItem.get("status")

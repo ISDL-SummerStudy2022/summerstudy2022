@@ -24,7 +24,7 @@ CREATE TABLE  items (
   datetime DATE,
   status BOOLEAN,
   eventid VARCHAR(100),
-  foreign key (userid) references users(id) ,
+  foreign key (userid) references users(id),
   foreign key (genreid) references genres(id),
   PRIMARY KEY (id)
 );
