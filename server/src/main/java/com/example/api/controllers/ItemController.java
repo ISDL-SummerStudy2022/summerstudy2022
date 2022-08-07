@@ -78,21 +78,15 @@ public class ItemController {
 
     @RequestMapping(value = "/select", method = RequestMethod.POST)
     public List<ItemEntity> itemSelect(@RequestBody ItemEntity item) {
-      String sqlText = ""
-      + "SELECT"
-          + " *"
-      + " FROM"
-          + " items" + " WHERE"
-          + " userID = ?";
-
+      String sqlText = ""+ "SELECT"+ " *"+ " FROM" + " items" + " WHERE" + " userID = ?";
       System.out.println(item.getitemID());
-// queryForListメソッドでSQLを実行し、結果MapのListで受け取る。
+  // queryForListメソッドでSQLを実行し、結果MapのListで受け取る。
   List<Map<String, Object>> items = jdbcTemplate.queryForList(sqlText,item.getuserID());
   System.out.println(items);
-  // Userオブジェクト格納用のListを作成する。
+  // Itemオブジェクト格納用のListを作成する。
   List<ItemEntity> itemList = new ArrayList<ItemEntity>();
   
-  // 受け取ったMapのListをfor文で回し、各ユーザの値をUserオブジェクトに格納する。
+  // 受け取ったMapのListをfor文で回し、各itemの値をItemオブジェクトに格納する。
   for(Map<String, Object> eachItem: items) {
       ItemEntity DBitem = new ItemEntity(
                (int) eachItem.get("id")
@@ -104,8 +98,8 @@ public class ItemController {
               ,(boolean) eachItem.get("status")
               ,(String) eachItem.get("eventid")
        );
-       
-      // UserオブジェクトをListに追加する。
+
+      // ItemオブジェクトをListに追加する。
       itemList.add(DBitem);
     }
 
