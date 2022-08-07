@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import './assets/css/styles.scss'; //基本となるstyles.scssを読み込み
-
-import App from './App'; //App.tsxの読み込み
+import './assets/css/styles.scss'
+import App from './App';
+// import reportWebVitals from './reportWebVitals';
+import { ApiFetch } from './components/ApiFetch';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App /> {/*  App.tsxを読み込んでいる */}
+    <App />
+    <ApiFetch />
   </React.StrictMode>,
   document.getElementById('root')
 );
+// reportWebVitals();

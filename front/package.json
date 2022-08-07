@@ -1,5 +1,11 @@
 {
   "dependencies": {
     "sass": "^1.54.3"
+  },
+  "devDependencies": {
+    "msw": "^0.44.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
