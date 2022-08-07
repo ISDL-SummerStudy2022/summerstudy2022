@@ -88,22 +88,23 @@ public class ItemController {
       System.out.println(item.getitemID());
 // queryForListメソッドでSQLを実行し、結果MapのListで受け取る。
   List<Map<String, Object>> items = jdbcTemplate.queryForList(sqlText,item.getuserID());
-  
+  System.out.println(items);
   // Userオブジェクト格納用のListを作成する。
   List<ItemEntity> itemList = new ArrayList<ItemEntity>();
   
   // 受け取ったMapのListをfor文で回し、各ユーザの値をUserオブジェクトに格納する。
   for(Map<String, Object> eachItem: items) {
       ItemEntity DBitem = new ItemEntity(
-               (int) eachItem.get("itemID")
-              ,(int) eachItem.get("userID")
+               (int) eachItem.get("id")
+              ,(int) eachItem.get("userid")
               ,(String) eachItem.get("text")
-              ,(int) eachItem.get("genreID")
+              ,(int) eachItem.get("genreid")
               ,(int) eachItem.get("priority")
               ,(Date) eachItem.get("datetime")
               ,(boolean) eachItem.get("status")
               ,(String) eachItem.get("eventid")
        );
+       
       // UserオブジェクトをListに追加する。
       itemList.add(DBitem);
     }
