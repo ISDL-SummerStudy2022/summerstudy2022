@@ -1,1 +1,1 @@
-curl -X POST -H 'Content-Type:application/json' -d '{"itemID": 8}' localhost:8080/item/delete
+curl -X POST -H 'Content-Type:application/json' -d '{"itemID": 1}' localhost:8080/item/delete
