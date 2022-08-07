@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.api.model.Todo;
 import com.example.api.service.TodoService;
 
+@RequestMapping(path="/item")
 @RestController
 public class ItemController {
     @Autowired
@@ -20,27 +21,27 @@ public class ItemController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @RequestMapping(path = "/item/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String itemInsert() {
       return "itemInsert";
     }
 
-    @RequestMapping(path = "/item/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String itemUpdate() {
       return "itemUpdate";
     }
 
-    @RequestMapping(path = "/item/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String itemDelete() {
       return "itemDelete";
     }
 
-    @RequestMapping(path = "/item/select", method = RequestMethod.POST)
+    @RequestMapping(value = "/select", method = RequestMethod.POST)
     public String itemSelect() {
       return "itemSelect";
     }
 
-    @RequestMapping(path = "/item/selectall", method = RequestMethod.POST)
+    @RequestMapping(value = "/selectall", method = RequestMethod.POST)
     public String itemSelectAll() {
       return "itemSelect";
     }
