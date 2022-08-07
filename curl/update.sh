@@ -1,0 +1,1 @@
+curl -X POST -H 'Content-Type:application/json' -d '{"itemID": 1, "UserID": 1, "text": "Change text", "GenreID": 1, "priority": 1, "date-time": '1999-01-08', "Status": false}' localhost:8080/item/update

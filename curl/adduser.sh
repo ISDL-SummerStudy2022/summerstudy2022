@@ -1,0 +1,1 @@
+curl -X POST -H 'Content-Type:application/json' -d '{"name": "Hanako", "email": Hanako@mikilab.doshisha.ac.jp}' localhost:8080/user/insert
