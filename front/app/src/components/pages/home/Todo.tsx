@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import classes from './Todo.module.scss';
 
 import { Item } from '../../types/item';
@@ -19,18 +19,21 @@ export const Todo = () => {
   // const userName: UserName = {};
   // userName[1] = name;
   //
-  const [items, setItems] = useState<Array<Item>>([{
-    key: getKey(), user: name, text: 'これはダミーのTODOです', done: false, genre: ''
-  }]);
+  // const [items, setItems] = useState<Array<Item>>([{
+  //   key: getKey(), user: name, text: 'これはダミーのTODOです', done: false, genre: 'その他', priority: 0
+  // }]);
+  const [items, setItems] = useState<Array<Item>>([]);
   const [itemsDone, setItemsDone] = useState<Array<Item>>([]);
   const [text, setText] = useState<string>('');
   const [typing, setTyping] = useState<boolean>(false);
-  //
+  //追加
   const [genre, setGenre] = useState<string>('');
+  const [priority, setPriority] = useState<number>(0);
+  // const [flag, setFlag] = useState<number>(0);
 
   const onAdd = useCallback(
-    (inputText: string, inputGenre: string) => {
-      setItems([...items, { key: getKey(), user: name, text: inputText, done: false, genre: inputGenre }]);
+    (inputText: string, inputGenre: string, inputPriority: number) => {
+      setItems([...items, { key: getKey(), user: name, text: inputText, done: false, genre: inputGenre, priority: inputPriority }]);
     },
     [items]
   );
@@ -40,7 +43,7 @@ export const Todo = () => {
       <div className={classes.inner}>
         <div className={classes.main}>
           <h1 className={classes.heading}>{name}のやることリスト</h1>
-          <TodoInput onAdd={onAdd} text={text} setText={setText} typing={typing} setTyping={setTyping} genre={genre} setGenre={setGenre} />
+          <TodoInput onAdd={onAdd} text={text} setText={setText} typing={typing} setTyping={setTyping} genre={genre} setGenre={setGenre} priority={priority} setPriority={setPriority} />
           <TodoAdd items={items} setItems={setItems} itemsDone={itemsDone} setItemsDone={setItemsDone} />
         </div>
         <TodoDones itemsDone={itemsDone} />

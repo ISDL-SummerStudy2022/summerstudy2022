@@ -4,7 +4,7 @@ export type Item = {
     text: string;
     done: boolean;
     genre: string;
-    // priority: number;
+    priority: number;
   };
 
 export type User = {

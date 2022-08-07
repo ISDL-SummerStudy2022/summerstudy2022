@@ -6,6 +6,8 @@ import { Item } from '../types/item';
 
 import { TodoItem } from './TodoItem';
 
+import sortImage from "../../assets/img/sort.png";
+
 type Props = {
   items: Array<Item>;
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
@@ -48,17 +50,36 @@ export const TodoAdd: VFC<Props> = memo((props) => {
 
   const onClickAllClear = () => {
     const newItems: Array<Item> = [];
-    setItems(newItems);
+    setItems(newItems)
   };
+
+  // sort機能
+  const sortItems = () => {
+    const copyItems = items.slice();
+    const sortItems_up = [...items].sort((a, b) => 0 - (a.priority > b.priority ? -1 : 1));
+    const sortItems_down = [...sortItems_up].sort((a, b) => 0 - (a.priority > b.priority ? 1 : -1));
+    if (copyItems[0].priority === sortItems_up[0].priority) {
+      setItems(sortItems_down);
+    }
+    else {
+      setItems(sortItems_up);
+    }
+  };
+
   return (
     <div className={classes.block}>
       <div className={classes.blockUpper}>
-        <div className={classes.todoLength}>{TodoDoneLength()}</div>
+        <div className={classes.blockUpperHead}>
+          <div className={classes.todoSort}>
+            <button className={classes.sort} onClick={sortItems} type="button"><img src={sortImage} alt=""/></button>
+          </div>
+          <div className={classes.todoLength}>{TodoDoneLength()}</div>
+        </div>
         {items.map((item) => (
           <TodoItem key={item.key} item={item} onCheck={onCheckChange} />
         ))}
       </div>
-      <div className={classes.blockBottom}>
+      <div className={classes.blockBotton}>
         <button className={classes.button} onClick={onClickDelete} type="button">
           完了済を削除
         </button>
