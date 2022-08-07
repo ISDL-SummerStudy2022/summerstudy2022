@@ -1,40 +1,30 @@
 package com.example.api.model;
-
-import javax.persistence.Entity;
-// import javax.persistence.GeneratedValue;
-// import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
-// @Entity
-public class ItemInsert {
-    // @Id
-    private int id;
-    // @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int userid;
+
+public class ItemEntity {
+    private int itemID;
+    private int userID;
     private String text;
-    private int genreid;
+    private int genreID;
     private int priority;
     private Date datetime;
     private boolean status;
     private String eventid;
 
-    public int getid() {
-      return id;
+    public int getitemID() {
+      return itemID;
     }
-    public int getuserid() {
-      return userid;
+    public int getuserID() {
+      return userID;
     }
-    // public void setCol1(String col1) {
-    //   this.col1 = col1;
-    // }
-
+    
     public String gettext() {
       return text;
     }
 
-    public int getgenreid() {
-      return genreid;
+    public int getgenreID() {
+      return genreID;
     }
 
     public Boolean getstatus(){
@@ -57,21 +47,22 @@ public class ItemInsert {
         return eventid;
     }
 
-    public ItemInsert() {
+    public ItemEntity() {
     }
-    public ItemInsert(
-     int id,
-     int userid,
+
+    public ItemEntity(
+     int itemID,
+     int userID,
      String text,
-     int genreid,
+     int genreID,
      int priority,
      Date datetime,
      boolean status,
      String eventid){
-      this.id = id;
-      this.userid = userid;
+      this.itemID = itemID;
+      this.userID = userID;
       this.text = text;
-      this.genreid = genreid;
+      this.genreID = genreID;
       this.priority = priority;
       this.datetime = datetime;
       this.status = status;

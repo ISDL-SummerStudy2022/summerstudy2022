@@ -17,15 +17,15 @@ CREATE TABLE genres(
 
 CREATE TABLE  items (
   id SERIAL NOT NULL,
-  userid INT,
+  userID INT,
   text VARCHAR(300),
-  genreid INT,
+  genreID INT,
   priority INT,   
   datetime DATE,
   status BOOLEAN,
   eventid VARCHAR(100),
-  foreign key (userid) references users(id),
-  foreign key (genreid) references genres(id),
+  foreign key (userID) references users(id),
+  foreign key (genreID) references genres(id),
   PRIMARY KEY (id)
 );
 
