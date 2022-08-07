@@ -3,7 +3,7 @@ import { ChangeEvent, KeyboardEvent, memo, useCallback, VFC } from 'react';
 import classes from './LoginInput.module.scss';
 
 type Props = {
-  username: string;
+  // username: string;
   password: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
   typing: boolean;
@@ -11,15 +11,15 @@ type Props = {
   onAdd: (text: string) => void;
 };
 
-export const LoginInput: VFC<Props> = memo((props) => {
-  const { username, password, setText, typing, setTyping, onAdd } = props;
+export const PasswordInput: VFC<Props> = memo((props) => {
+  const {password, setText, typing, setTyping, onAdd } = props;
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setText(e.target.value), [setText]);
   
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (!username) return;
+    if (!password) return;
     if (e.key !== 'Enter' || typing) return;
-    onAdd(username);
+    onAdd(password);
     setText('');
   };
   
@@ -29,28 +29,15 @@ export const LoginInput: VFC<Props> = memo((props) => {
         <input
         className={classes.input}
         type="text"
-        placeholder="Enterで入力する"
-        value={username}
+        placeholder="Password"
+        value={password}
         onChange={handleChange}
 
-        // onKeyDown={handleKeyDown}
-        // onCompositionStart={() => setTyping(true)}
-        // onCompositionEnd={() => setTyping(false)}
+        onKeyDown={handleKeyDown}
+        onCompositionStart={() => setTyping(true)}
+        onCompositionEnd={() => setTyping(false)}
         />
       </div>
-      <div>
-        <input
-          className={classes.input}
-          type="text"
-          placeholder="Enterで入力する"
-          value={password}
-          // onChange={handleChange}
-          // onKeyDown={handleKeyDown}
-          // onCompositionStart={() => setTyping(true)}
-          // onCompositionEnd={() => setTyping(false)}
-        />
-      </div>
-      
     </div>
   );
 });
