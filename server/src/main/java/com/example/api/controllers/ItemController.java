@@ -17,10 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import org.springframework.http.MediaType;
-import com.example.api.model.Todo;
-import com.example.api.service.TodoService;
-
 @RequestMapping(path = "/item")
 @RestController
 public class ItemController {
@@ -81,22 +77,24 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/select", method = RequestMethod.POST)
-    public List<ItemEntity> itemSelect() {
+    public List<ItemEntity> itemSelect(@RequestBody ItemEntity item) {
       String sqlText = ""
       + "SELECT"
           + " *"
       + " FROM"
-          + " items";
+          + " items" + " WHERE"
+          + " userID = ?";
 
+      System.out.println(item.getitemID());
 // queryForListメソッドでSQLを実行し、結果MapのListで受け取る。
-  List<Map<String, Object>> items = jdbcTemplate.queryForList(sqlText);
+  List<Map<String, Object>> items = jdbcTemplate.queryForList(sqlText,item.getuserID());
   
   // Userオブジェクト格納用のListを作成する。
   List<ItemEntity> itemList = new ArrayList<ItemEntity>();
   
   // 受け取ったMapのListをfor文で回し、各ユーザの値をUserオブジェクトに格納する。
   for(Map<String, Object> eachItem: items) {
-      ItemEntity item = new ItemEntity(
+      ItemEntity DBitem = new ItemEntity(
                (int) eachItem.get("itemID")
               ,(int) eachItem.get("userID")
               ,(String) eachItem.get("text")
@@ -107,7 +105,7 @@ public class ItemController {
               ,(String) eachItem.get("eventid")
        );
       // UserオブジェクトをListに追加する。
-      itemList.add(item);
+      itemList.add(DBitem);
     }
 
   return itemList;
