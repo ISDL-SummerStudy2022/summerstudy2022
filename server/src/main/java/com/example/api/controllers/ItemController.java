@@ -4,7 +4,8 @@ import com.example.api.model.ItemInsert;
 
 import java.util.List;
 import java.util.Map;
-
+import java.util.Date;
+import java.util.ArrayList;
 
 
 import org.springframework.dao.DataAccessException;
@@ -31,8 +32,6 @@ public class ItemController {
     public boolean responsejson2(
         @RequestBody ItemInsert item) {
           System.out.println("*** JDBC Start. ***");
-          // String sql = "select * from items";
-
           String sqlText  = "INSERT INTO items (userid,text,genreid,priority,datetime,status) "
                     + "VALUES (?,?,?,?,?,?)";       
           try{
@@ -45,26 +44,72 @@ public class ItemController {
               System.out.println(e);
               return false;
           }
-          
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String itemUpdate() {
-      return "itemUpdate";
+    public boolean itemUpdate(
+      @RequestBody ItemInsert item) {
+          System.out.println("*** JDBC Start. ***");
+          String sqlText = "UPDATE items SET "+ " userid = ? ,text = ? ,genreid = ? ,priority = ? ,datetime = ? ,status = ? " + "WHERE" + " id = ?;";   
+          try{
+            jdbcTemplate.update(sqlText,item.getuserid(),item.gettext(),item.getgenreid(),item.getpriority(),item.getdatetime(),item.getstatus(),item.getid());
+            return true;
+          }
+          catch (DataAccessException e)
+          {
+              System.out.println("DB処理エラー");
+              System.out.println(e);
+              return false;
+          }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String itemDelete() {
-      return "itemDelete";
+    public boolean itemDelete(     
+      @RequestBody ItemInsert item) {
+      System.out.println("*** JDBC Start. ***");
+      String sqlText = "DELETE FROM items WHERE id = ?"; 
+      try{
+        jdbcTemplate.update(sqlText,item.getid());
+        return true;
+      }
+      catch (DataAccessException e)
+      {
+          System.out.println("DB処理エラー");
+          System.out.println(e);
+          return false;
+      }
     }
 
     @RequestMapping(value = "/select", method = RequestMethod.POST)
-    public String itemSelect() {
-      return "itemSelect";
+    public List<ItemInsert> itemSelect() {
+      String sqlText = ""
+      + "SELECT"
+          + " *"
+      + " FROM"
+          + " items";
+
+// queryForListメソッドでSQLを実行し、結果MapのListで受け取る。
+  List<Map<String, Object>> items = jdbcTemplate.queryForList(sqlText);
+  
+  // Userオブジェクト格納用のListを作成する。
+  List<ItemInsert> itemList = new ArrayList<ItemInsert>();
+  
+  // 受け取ったMapのListをfor文で回し、各ユーザの値をUserオブジェクトに格納する。
+  for(Map<String, Object> eachItem: items) {
+      ItemInsert item = new ItemInsert(
+               (int) eachItem.get("id")
+              ,(int) eachItem.get("userid")
+              ,(String) eachItem.get("text")
+              ,(int) eachItem.get("genreid")
+              ,(int) eachItem.get("priority")
+              ,(Date) eachItem.get("datetime")
+              ,(boolean) eachItem.get("status")
+              ,(String) eachItem.get("eventid")
+       );
+      // UserオブジェクトをListに追加する。
+      itemList.add(item);
     }
 
-    @RequestMapping(value = "/selectall", method = RequestMethod.POST)
-    public String itemSelectAll() {
-      return "itemSelect";
+  return itemList;
     }
 }
