@@ -9,7 +9,9 @@ import {
   Outlet,
 } from "react-router-dom";
 import { fakeAuthProvider } from "./components/modules/auth";
-import { Todo } from './components/pages/home/Todo'; //Todo.tsxの読み込み
+import { Todo } from './components/pages/Todo'; //Todo.tsxの読み込み
+import { Login } from './components/pages/Login'; //Todo.tsxの読み込み
+
 
 
 export default function App() {
@@ -19,6 +21,8 @@ export default function App() {
         <Route element={<Layout />}>
           {/* <Route path="/" element={<PublicPage />} /> */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/auth" element={<Login />} />
+
           <Route
             path="/"
             element={
@@ -40,7 +44,10 @@ function Layout() {
 
       <ul>
         <li>
-          <Link to="/login">Login Page</Link>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/auth">Login Page</Link>
         </li>
         <li>
           <Link to="/">Protected Page</Link>

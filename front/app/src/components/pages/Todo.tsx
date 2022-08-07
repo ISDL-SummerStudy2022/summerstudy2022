@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import classes from './Todo.module.scss';
 
-import { Item } from '../../types/item';
+import { Item } from '../types/item';
 
-import { TodoInput } from '../../blocks/TodoInput'; //コンポーネント読み込み
-import { TodoAdd } from '../../blocks/TodoAdd'; //コンポーネント読み込み
-import { TodoDones } from '../../blocks/TodoDones'; //コンポーネントの読み込み
+import { TodoInput } from '../blocks/TodoInput'; //コンポーネント読み込み
+import { TodoAdd } from '../blocks/TodoAdd'; //コンポーネント読み込み
+import { TodoDones } from '../blocks/TodoDones'; //コンポーネントの読み込み
 
 const getKey = () => Math.random().toString(32).substring(2); // 0〜1未満の乱数字を取得して、数字を32進法に文字列に変換。前から３番目から文字を抽出
 
