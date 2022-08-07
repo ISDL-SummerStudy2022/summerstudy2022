@@ -1,14 +1,4 @@
 -- DB切り替え
-\c testdb
-
--- テーブル作成
-CREATE TABLE  item (
-  col1 VARCHAR(10),
-  col2 VARCHAR(10),
-  col3 VARCHAR(10),
-  PRIMARY KEY (col1)
-);
-
 \c tododb
 
 CREATE TABLE  users (
@@ -37,4 +27,11 @@ CREATE TABLE  items (
   foreign key (userid) references users(id) ,
   foreign key (genreid) references genres(id),
   PRIMARY KEY (id)
+);
+
+CREATE TABLE  test (
+  col1 VARCHAR(10),
+  col2 VARCHAR(10),
+  col3 VARCHAR(10),
+  PRIMARY KEY (col1)
 );

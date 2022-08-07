@@ -20,44 +20,29 @@ public class TestController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @RequestMapping(path = "/todo/insert", method = RequestMethod.GET)
-    public String testInsert() {
-      return "testInsert";
-    }
-
-    @RequestMapping(path = "/todo/update", method = RequestMethod.GET)
-    public String testUpdate() {
-      return "testUpdate";
-    }
-
-    @RequestMapping(path = "/todo/delete", method = RequestMethod.GET)
-    public String testDelete() {
-      return "testDelete";
-    }
-
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String test() {
       return "ok from test.";
     }
 
-    @RequestMapping(path = "/hello", method = RequestMethod.GET)
-    public List<Todo> hello() {
-      List<Todo> todoDataList = todoService.findAllTodoData();
+    // @RequestMapping(path = "/hello", method = RequestMethod.GET)
+    // public List<Todo> hello() {
+    //   List<Todo> todoDataList = todoService.findAllTodoData();
 
-      return todoDataList;
-    }
+    //   return todoDataList;
+    // }
 
-    @RequestMapping(path = "/hello/select", method = RequestMethod.GET)
-    public List<Todo> helloSelect() {
-      List<Todo> todoDataListSelect = todoService.findTodoDataListByCol1("1111");
+    // @RequestMapping(path = "/hello/select", method = RequestMethod.GET)
+    // public List<Todo> helloSelect() {
+    //   List<Todo> todoDataListSelect = todoService.findTodoDataListByCol1("1111");
 
-      return todoDataListSelect;
-    }
+    //   return todoDataListSelect;
+    // }
 
     @RequestMapping(path = "/hello/jdbc", method = RequestMethod.GET)
     public String helloJDBC() {
       System.out.println("*** JDBC Start. ***");
-      String sql = "select * from item";
+      String sql = "select * from items";
       List<Map<String, Object>> sqlResultList = jdbcTemplate.queryForList(sql);
       sqlResultList.forEach(s -> {
           System.out.println(s);
