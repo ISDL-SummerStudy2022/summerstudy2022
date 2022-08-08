@@ -3,25 +3,22 @@ import { ChangeEvent, KeyboardEvent, memo, useCallback, VFC } from 'react';
 import classes from './LoginInput.module.scss';
 
 type Props = {
-  username: string;
-  password: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
+  // username: string;
+  Username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
   typing: boolean;
-  setTyping: React.Dispatch<React.SetStateAction<boolean>>;
-  onAdd: (text: string) => void;
+  // setTyping: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const LoginInput: VFC<Props> = memo((props) => {
-  const { username, password, setText, typing, setTyping, onAdd } = props;
+  const {Username, setUsername, typing} = props;
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setText(e.target.value), [setText]);
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value), [setUsername]);
   
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (!username) return;
-    if (e.key !== 'Enter' || typing) return;
-    onAdd(username);
-    setText('');
-  };
+  // const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  //   if (!password) return;
+  //   setText(password)
+  // };
   
   return (
     <div className={classes.block}>
@@ -29,8 +26,8 @@ export const LoginInput: VFC<Props> = memo((props) => {
         <input
         className={classes.input}
         type="text"
-        placeholder="Enterで入力する"
-        value={username}
+        placeholder="Username"
+        value={Username}
         onChange={handleChange}
 
         // onKeyDown={handleKeyDown}
@@ -38,19 +35,6 @@ export const LoginInput: VFC<Props> = memo((props) => {
         // onCompositionEnd={() => setTyping(false)}
         />
       </div>
-      {/* <div>
-        <input
-          className={classes.input}
-          type="text"
-          placeholder="Enterで入力する"
-          value={password}
-          // onChange={handleChange}
-          // onKeyDown={handleKeyDown}
-          // onCompositionStart={() => setTyping(true)}
-          // onCompositionEnd={() => setTyping(false)}
-        />
-      </div> */}
-      
     </div>
   );
 });
