@@ -29,12 +29,38 @@ public class TestController {
             return testjson;
     }
 
-    @RequestMapping(path = "/test/json2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Testjson responsejson(
-          @RequestBody Testjson testjson) {
-            System.out.println("testing3");
-            return testjson;
+    @RequestMapping(path = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean responsejson(
+          @RequestBody Testjson userinfo) {
+            System.out.println(userinfo);
+            return true;
     }
+
+    public static class userjson {
+      private String username;
+      private String email;
+      private String password;
+
+      public String getUsername(){
+        return username;
+      }
+      public String getEmail(){
+        return email;
+      }
+      public String getPassword(){
+        return password;
+      }
+      public void setUsername(String username){
+        this.username=username;
+      }
+      public void setEmail(String email){
+        this.email=email;
+      }
+      public void setPassword(String password){
+        this.password=password;
+      }
+    }
+
 
     public static class Testjson {
       private String value1;

@@ -11,7 +11,7 @@ import {
 import { fakeAuthProvider } from "./components/modules/auth";
 import { Todo } from './components/pages/Todo'; //Todo.tsxの読み込み
 import { Login } from './components/pages/Login'; //Todo.tsxの読み込み
-
+import { RegistUser } from './components/pages/RegistUser';
 
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
           {/* <Route path="/" element={<PublicPage />} /> */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/auth" element={<Login />} />
-
+          <Route path="/registuser" element={<RegistUser />} />
           <Route
             path="/"
             element={
@@ -48,6 +48,9 @@ function Layout() {
         </li>
         <li>
           <Link to="/auth">Login Page</Link>
+        </li>
+        <li>
+          <Link to="/registuser">Regist User</Link>
         </li>
         <li>
           <Link to="/">Protected Page</Link>
