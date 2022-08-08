@@ -7,8 +7,15 @@
     font-size: 14px;
     font-weight: 700;
   }
+  .dateform{
+    width: 50px;
+  }
+    .date{
+      width: calc(100% - 10px);
+      text-align: center;
+    }
   .form1{
-    width: calc(100% - 200px);
+    width: calc(100% - 250px);
   }
     .priority{
       color: var(--color-white);

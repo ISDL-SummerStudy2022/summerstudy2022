@@ -5,10 +5,5 @@ export type Item = {
     done: boolean;
     genre: string;
     priority: number;
+    date: Date;
   };
-
-export type User = {
-  key: string;
-  name: string;
-  email: string;
-};

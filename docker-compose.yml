@@ -14,8 +14,8 @@ services:
       context: ./front
       dockerfile: Dockerfile
     volumes:
-      - ./front:/src
-    command: sh -c "cd app && yarn add sass && PORT=80 yarn start"
+      - ./front:/src:cached
+    command: sh -c "cd app && yarn add react-datepicker && yarn add sass && PORT=80 yarn start"
     ports:
       - "80:80"
     stdin_open: true
