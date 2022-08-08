@@ -21,7 +21,7 @@ export const Menubar: VFC = memo(() => {
         <li className={classes.li}><a className={classes.sitetitle} href="/">ISDL Todo</a></li>
         <li className={classes.li}><a className={classes.lia} href="/">Home</a></li>
         <li className={classes.li}><a className={classes.lia} href="/login">Login</a></li>
-        <li className={classes.li}><a className={classes.lia} href="/auth">Auth</a></li>
+        <li className={classes.li}><a className={classes.lia} href="/register">Register</a></li>
         <li className={classes.ri}><AuthStatus /></li>
         </ul>
     </nav>

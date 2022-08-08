@@ -1,9 +1,11 @@
 .block {
     background-color: var(--color-white);
     text-align: center;
+    padding-top: 8px;
   }
   .input {
     width: calc(100% - 80px);
+    height: 20%;
     font-size: 15px;
     line-height: 1;
     padding: 8px 15px 8px;
@@ -11,5 +13,6 @@
     background-color: #fff;
     outline: 0;
     border-radius: 7px;
+    font-family: Arial;
   }
   
