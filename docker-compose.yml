@@ -15,7 +15,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./front:/src
-    command: sh -c "cd app && yarn add react-router-dom sass && PORT=80 yarn start"
+    command: sh -c "cd app && yarn add react-router-dom sass @mui/material && PORT=80 yarn start"
     ports:
       - "80:80"
     stdin_open: true

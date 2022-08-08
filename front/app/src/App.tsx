@@ -2,7 +2,7 @@ import * as React from "react";
 import {
   Routes,
   Route,
-  Link,
+  // Link,
   useNavigate,
   useLocation,
   Navigate,
@@ -11,6 +11,9 @@ import {
 import { fakeAuthProvider } from "./components/modules/auth";
 import { Todo } from './components/pages/Todo'; //Todo.tsxの読み込み
 import { Login } from './components/pages/Login'; //Todo.tsxの読み込み
+import {Menubar} from './components/blocks/Menubar'
+import classes from './components/blocks/Menubar.module.scss'
+
 
 
 
@@ -18,10 +21,11 @@ export default function App() {
   return (
     <AuthProvider>
       <Routes>
+        
         <Route element={<Layout />}>
           {/* <Route path="/" element={<PublicPage />} /> */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/auth" element={<Login />} />
+          {/* <Route path="/auth" element={<LoginPage />} /> */}
+          <Route path="/login" element={<Login />} />
 
           <Route
             path="/"
@@ -40,20 +44,8 @@ export default function App() {
 function Layout() {
   return (
     <div>
-      <AuthStatus />
-
-      <ul>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/auth">Login Page</Link>
-        </li>
-        <li>
-          <Link to="/">Protected Page</Link>
-        </li>
-      </ul>
-
+      {/* <AuthStatus /> */}
+      <Menubar />
       <Outlet />
     </div>
   );
@@ -98,11 +90,11 @@ function AuthStatus() {
   let navigate = useNavigate();
 
   if (!auth.user) {
-    return <p>You are not logged in.</p>;
+    return <a className={classes.lia}>You are not logged in.</a>;
   }
 
   return (
-    <p>
+    <a className={classes.lia}>
       Welcome {auth.user}!{" "}
       <button
         onClick={() => {
@@ -111,7 +103,7 @@ function AuthStatus() {
       >
         Sign out
       </button>
-    </p>
+    </a>
   );
 }
 
@@ -130,54 +122,47 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   return children;
 }
 
-function LoginPage() {
-  let navigate = useNavigate();
-  let location = useLocation();
-  let auth = useAuth();
-  const from = "/";
-  // const from = location.state?.from?.pathname || "/";
+// function LoginPage() {
+//   let navigate = useNavigate();
+//   // let location = useLocation();
+//   let auth = useAuth();
+//   const from = "/";
+//   // const from = location.state?.from?.pathname || "/";
 
-  // try{
-  //   const from = location.state?.from?.pathname; 
-  // }catch{
-  //   const from = "/";
-  // }
+//   // try{
+//   //   const from = location.state?.from?.pathname; 
+//   // }catch{
+//   //   const from = "/";
+//   // }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+//   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+//     event.preventDefault();
 
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get("username") as string;
+//     let formData = new FormData(event.currentTarget);
+//     let username = formData.get("username") as string;
 
-    auth.signin(username, () => {
-      // Send them back to the page they tried to visit when they were
-      // redirected to the login page. Use { replace: true } so we don't create
-      // another entry in the history stack for the login page.  This means that
-      // when they get to the protected page and click the back button, they
-      // won't end up back on the login page, which is also really nice for the
-      // user experience.
-      navigate(from, { replace: true });
-    });
-  }
+//     auth.signin(username, () => {
+//       // Send them back to the page they tried to visit when they were
+//       // redirected to the login page. Use { replace: true } so we don't create
+//       // another entry in the history stack for the login page.  This means that
+//       // when they get to the protected page and click the back button, they
+//       // won't end up back on the login page, which is also really nice for the
+//       // user experience.
+//       navigate(from, { replace: true });
+//     });
+//   }
 
-  return (
-    <div>
-      <p>You must log in to view the page at {from}</p>
+//   return (
+//     <div>
+//       <p>You must log in to view the page at {from}</p>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username: <input name="username" type="text" />
-        </label>{" "}
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
-}
-
-function PublicPage() {
-  return <h3>Public</h3>;
-}
-
-function ProtectedPage() {
-  return <h3>Protected</h3>;
-}
+//       <form onSubmit={handleSubmit}>
+//         <label>
+//           Username: <input name="username" type="text" />
+//         </label>{" "}
+//         <button type="submit">Login</button>
+//       </form>
+//     </div>
+//   );
+// }
+export {AuthStatus, useAuth};
