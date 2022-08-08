@@ -7,6 +7,40 @@
     font-size: 14px;
     font-weight: 700;
   }
+  .dateform{
+    width: 50px;
+  }
+    .date{
+      width: calc(100% - 10px);
+      text-align: center;
+    }
+  .form1{
+    width: calc(100% - 250px);
+  }
+    .priority{
+      color: var(--color-white);
+      width: 30px;
+      text-align: center;
+      margin: 0 4px 0 4px;
+      display: inline-block;
+      border: solid 1px red;
+      border-radius: 20px;
+      background: red;
+    }
+  .form2{
+    width: 120px;
+    font-size: 14px;
+    font-weight: 700;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    color: var(--color-white);
+    background: var(--color-orange);
+    border: solid 3px var(--color-orange);
+    border-radius: 5px;
+    text-align: center;
+  }
   .text {
     padding-right: 15px;
   }
@@ -14,4 +48,3 @@
     text-decoration: line-through;
     color: var(--color-gray-v6);
   }
-  

@@ -6,6 +6,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 
+import './assets/css/styles.scss'; //基本となるstyles.scssを読み込み
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
