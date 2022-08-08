@@ -11,9 +11,9 @@ import {
 import { fakeAuthProvider } from "./components/modules/auth";
 import { Todo } from './components/pages/Todo'; //Todo.tsxの読み込み
 import { Login } from './components/pages/Login'; //Todo.tsxの読み込み
+import { RegistUser } from './components/pages/RegistUser';
 import {Menubar} from './components/blocks/Menubar'
 import classes from './components/blocks/Menubar.module.scss'
-
 
 
 
@@ -24,8 +24,10 @@ export default function App() {
         
         <Route element={<Layout />}>
           {/* <Route path="/" element={<PublicPage />} /> */}
-          {/* <Route path="/auth" element={<LoginPage />} /> */}
-          <Route path="/login" element={<Login />} />
+
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/auth" element={<Login />} />
+          <Route path="/registuser" element={<RegistUser />} />
 
           <Route
             path="/"
@@ -120,5 +122,6 @@ function RequireAuth({ children }: { children: JSX.Element }) {
 
   return children;
 }
+
 
 export {AuthStatus, useAuth};

@@ -25,7 +25,7 @@ export const PasswordInput: VFC<Props> = memo((props) => {
       <div>
         <input
         className={classes.input}
-        type="text"
+        type="password"
         placeholder="Password"
         value={password}
         onChange={handleChange}

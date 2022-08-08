@@ -9,20 +9,42 @@
   .blockUpper {
     padding: 0 25px 25px;
   }
-  .blockBottom {
+    .blockUpperHead{
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-gray-v4);
+    }
+      .todoSort {
+        font-size: 12px;
+        font-weight: 700;
+        padding-top: 20px;
+        padding-bottom: 3px;
+        // margin-left: 93px;
+      }
+        .sortDate{
+          margin-left: 23px;
+        }
+        .sort{
+          margin-left: 60px;
+        }
+      .todoLength {
+        text-align: right;
+        font-size: 12px;
+        font-weight: 700;
+        padding-top: 20px;
+        padding-bottom: 3px;
+        // border-bottom: 1px solid var(--color-gray-v4);
+        color: var(--color-gray-v2);
+      }
+      .todoLength_alert {
+        color: var(--color-gray-v8);
+      }
+  .blockBotton {
     align-self: center;
   }
-  .todoLength {
-    text-align: right;
-    font-size: 12px;
-    font-weight: 700;
-    padding-top: 20px;
-    padding-bottom: 3px;
-    border-bottom: 1px solid var(--color-gray-v4);
-    color: var(--color-gray-v2);
-  }
-  .todoLength_alert {
-    color: var(--color-gray-v8);
+  // 追加
+  .form1{
+    background: #ffd87c;
   }
   .button {
     font-size: 14px;
@@ -49,4 +71,3 @@
       background-color: var(--color-gray-v7);
     }
   }
-  
