@@ -84,7 +84,27 @@ function useAuth() {
   return React.useContext(AuthContext);
 }
 
+function AuthStatus() {
+  let auth = useAuth();
+  let navigate = useNavigate();
 
+  if (!auth.user) {
+    return <a className={classes.lia}>You are not logged in.</a>;
+  }
+
+  return (
+    <a className={classes.lia}>
+      Welcome {auth.user}!{" "}
+      <button
+        onClick={() => {
+          auth.signout(() => navigate("/login"));
+        }}
+      >
+        Sign out
+      </button>
+    </a>
+  );
+}
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   let auth = useAuth();
