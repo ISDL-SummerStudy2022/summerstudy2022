@@ -5,7 +5,8 @@
   isAuthenticated: false,
   signin(callback: VoidFunction) {
     fakeAuthProvider.isAuthenticated = true;
-    // ここにログイン処理
+    // apiのurl
+    
     console.log("Login")
     setTimeout(callback, 100); // fake async
   },

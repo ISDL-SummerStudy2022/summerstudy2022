@@ -1,17 +1,8 @@
-import { useCallback, useState } from 'react';
+import {  useState } from 'react';
 import classes from './Login.module.scss';
-import {
-  Routes,
-  Route,
-  // Link,
-  useNavigate,
-  useLocation,
-  Navigate,
-  Outlet,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginInput } from '../blocks/LoginInput'; //コンポーネント読み込み
-import {PasswordInput} from '../blocks/PasswordInput'
-import { Item } from '../types/item';
+import { PasswordInput } from '../blocks/PasswordInput'
 import { useAuth } from '../../App';
 
 
@@ -23,6 +14,8 @@ export const Login = () => {
   const from = "/";
 
   const [Username, setUsername] = useState<string>('');
+  const [Userid, setUser] = useState<string>('');
+
   const [Password, setPassword] = useState<string>('');
 
   const [typing, setTyping] = useState<boolean>(false);
@@ -31,12 +24,31 @@ export const Login = () => {
   const onClickLogin = () => {
     console.log(Username)
     console.log(Password)
-
-    auth.signin(Username, () => {
-      navigate(from, { replace: true });
-    });
-
-    // const Status = true
+    const posturl = "http://localhost:8080/user/select";
+      // 送信データ作成
+      const info = {
+        username: Username, userid: Userid, password: Password
+      };
+      // Javaと通信開始（POSTでデータ送信）
+      const response = fetch(posturl, {
+        method : "POST",
+        headers : {"Content-Type": "application/json"},
+        mode : 'cors',
+        body: JSON.stringify(info)
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        // setPosts(data);
+        // 返り値確認（=>ユーザ登録はboolean）
+        console.log(data);
+        if (data.check){
+          auth.signin(Username, Userid, () => {
+            navigate(from, { replace: true });
+          });}
+        else{
+          auth.signout(() => navigate("/login"));
+        }
+      });
   };
   return (
     <div className={classes.container}>

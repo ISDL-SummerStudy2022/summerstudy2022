@@ -52,7 +52,8 @@ function Layout() {
 
 interface AuthContextType {
   user: any;
-  signin: (user: string, callback: VoidFunction) => void;
+  userid: any;
+  signin: (user: string,userid: string, callback: VoidFunction) => void;
   signout: (callback: VoidFunction) => void;
 }
 
@@ -60,10 +61,14 @@ let AuthContext = React.createContext<AuthContextType>(null!);
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   let [user, setUser] = React.useState<any>(null);
+  let [userid, setUserid] = React.useState<any>(null);
 
-  let signin = (newUser: string, callback: VoidFunction) => {
+
+  let signin = (newUser: string, newUserid: string, callback: VoidFunction) => {
     return fakeAuthProvider.signin(() => {
       setUser(newUser);
+      setUserid(newUserid);
+
       callback();
     });
   };
@@ -71,11 +76,12 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   let signout = (callback: VoidFunction) => {
     return fakeAuthProvider.signout(() => {
       setUser(null);
+      setUserid(null);
       callback();
     });
   };
 
-  let value = { user, signin, signout };
+  let value = { user, userid, signin, signout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
