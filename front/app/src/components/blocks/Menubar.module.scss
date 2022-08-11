@@ -1,0 +1,37 @@
+.ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.li {
+  float: left;
+}
+.ri {
+  float: right;
+}
+
+.lia {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 25px 16px;
+  text-decoration: none;
+  font-family: Arial;
+}
+
+.lia:hover {
+  background-color: #111;
+}
+.sitetitle{
+  color: white;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 30px;
+}
+li {
+  float: left;
+}

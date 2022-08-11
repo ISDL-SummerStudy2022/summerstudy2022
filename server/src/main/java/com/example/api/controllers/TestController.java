@@ -64,4 +64,3 @@ public class TestController {
       public String value2;
     }
 }
-

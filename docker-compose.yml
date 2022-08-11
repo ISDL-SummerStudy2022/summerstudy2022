@@ -1,5 +1,12 @@
 version: '3.9'
 services:
+  react-app:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/src
+    command: sh -c "cd app && yarn add react-datepicker && yarn add react-router-dom sass && PORT=80 yarn start"
   api:
     build:
       context: ./server

@@ -1,26 +1,123 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import {
+  Routes,
+  Route,
+  // Link,
+  useNavigate,
+  useLocation,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { fakeAuthProvider } from "./components/modules/auth";
+import { Todo } from './components/pages/Todo'; //Todo.tsxの読み込み
+import { Login } from './components/pages/Login'; //Todo.tsxの読み込み
+import { RegistUser } from "./components/pages/RegistUser"; 
+import {Menubar} from './components/blocks/Menubar'
+import classes from './components/blocks/Menubar.module.scss'
 
-function App() {
+
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <AuthProvider>
+      <Routes>
+        
+        <Route element={<Layout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<RegistUser />} />
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Todo />
+              </RequireAuth>
+            }
+          />
+        </Route>
+      </Routes>
+    </AuthProvider>
+  );
+}
+
+function Layout() {
+  return (
+    <div>
+      <Menubar />
+      <Outlet />
     </div>
   );
 }
 
-export default App;
+interface AuthContextType {
+  user: any;
+  signin: (user: string, callback: VoidFunction) => void;
+  signout: (callback: VoidFunction) => void;
+}
+
+let AuthContext = React.createContext<AuthContextType>(null!);
+
+function AuthProvider({ children }: { children: React.ReactNode }) {
+  let [user, setUser] = React.useState<any>(null);
+
+  let signin = (newUser: string, callback: VoidFunction) => {
+    return fakeAuthProvider.signin(() => {
+      setUser(newUser);
+      callback();
+    });
+  };
+
+  let signout = (callback: VoidFunction) => {
+    return fakeAuthProvider.signout(() => {
+      setUser(null);
+      callback();
+    });
+  };
+
+  let value = { user, signin, signout };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+function useAuth() {
+  return React.useContext(AuthContext);
+}
+
+function AuthStatus() {
+  let auth = useAuth();
+  let navigate = useNavigate();
+
+  if (!auth.user) {
+    return <a className={classes.lia}>You are not logged in.</a>;
+  }
+
+  return (
+    <a className={classes.lia}>
+      Welcome {auth.user}!{" "}
+      <button
+        onClick={() => {
+          auth.signout(() => navigate("/login"));
+        }}
+      >
+        Sign out
+      </button>
+    </a>
+  );
+}
+
+function RequireAuth({ children }: { children: JSX.Element }) {
+  let auth = useAuth();
+  let location = useLocation();
+
+  if (!auth.user) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+
+export {AuthStatus, useAuth};
