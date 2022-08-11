@@ -1,69 +1,54 @@
 package com.example.api.controllers;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.api.service.TodoService;
+
 @RestController
 public class TestController {
-    @RequestMapping(path = "/test/json", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public List<Testjson> responsejson(
-          @RequestBody List<Testjson> testjson) {
-            System.out.println("testing2");
-            System.out.println(testjson);
-            return testjson;
+    @Autowired
+    TodoService todoService;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @RequestMapping(path = "/test", method = RequestMethod.GET)
+    public String test() {
+      return "ok from test.";
     }
 
-    @RequestMapping(path = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public boolean responsejson(
-          @RequestBody Testjson userinfo) {
-            System.out.println(userinfo);
-            return true;
-    }
+    // @RequestMapping(path = "/hello", method = RequestMethod.GET)
+    // public List<Todo> hello() {
+    //   List<Todo> todoDataList = todoService.findAllTodoData();
 
-    public static class userjson {
-      private String username;
-      private String email;
-      private String password;
+    //   return todoDataList;
+    // }
 
-      public String getUsername(){
-        return username;
-      }
-      public String getEmail(){
-        return email;
-      }
-      public String getPassword(){
-        return password;
-      }
-      public void setUsername(String username){
-        this.username=username;
-      }
-      public void setEmail(String email){
-        this.email=email;
-      }
-      public void setPassword(String password){
-        this.password=password;
-      }
-    }
+    // @RequestMapping(path = "/hello/select", method = RequestMethod.GET)
+    // public List<Todo> helloSelect() {
+    //   List<Todo> todoDataListSelect = todoService.findTodoDataListByCol1("1111");
 
+    //   return todoDataListSelect;
+    // }
 
-    public static class Testjson {
-      private String value1;
-      private String value2;
+    @RequestMapping(path = "/hello/jdbc", method = RequestMethod.GET)
+    public String helloJDBC() {
+      System.out.println("*** JDBC Start. ***");
+      String sql = "select * from items";
+      List<Map<String, Object>> sqlResultList = jdbcTemplate.queryForList(sql);
+      sqlResultList.forEach(s -> {
+          System.out.println(s);
+      });
+      System.out.println("*** JDBC End. ***");
 
-      public String getValue1(){
-        return value1;
-      }
-      public String getValue2(){
-        return value2;
-      }
-      public void setValue1(String value1){
-        this.value1=value1;
-      }
-      public void setValue2(String value2){
-        this.value2=value2;
-      }
+      return "JDBC";
     }
 
     @RequestMapping(path = "/test/json", method = RequestMethod.GET)
@@ -75,8 +60,7 @@ public class TestController {
     }
 
     public class Example {
-  		public String value1;
-	  	public String value2;
-	  }
+      public String value1;
+      public String value2;
+    }
 }
-

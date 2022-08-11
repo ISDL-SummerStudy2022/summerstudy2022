@@ -1,5 +1,12 @@
 version: '3.9'
 services:
+  react-app:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/src
+    command: sh -c "cd app && yarn add react-datepicker && yarn add react-router-dom sass && PORT=80 yarn start"
   api:
     build:
       context: ./server
@@ -9,14 +16,22 @@ services:
     ports:
       - '8080:8080'
     tty: true
-  react-app:
+  db:
+    privileged: true
     build:
-      context: ./front
-      dockerfile: Dockerfile
-    volumes:
-      - ./front:/src
-    command: sh -c "cd app && yarn add react-datepicker && yarn add react-router-dom sass && PORT=80 yarn start"
-
+      context: ./db
+      dockerfile: dockerfile
+    container_name: POSTGRESQL
     ports:
-      - "80:80"
-    stdin_open: true
+      - 5432:5432
+    volumes:
+      # - ./db/postgres:/var/lib/postgresql/data:Z
+      - ./db/script:/docker-entrypoint-initdb.d 
+    environment:
+      - POSTGRES_USER=testroot
+      - POSTGRES_PASSWORD=Password!
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+
+# volumes:
+#   postgres:
+#   pgadmin:

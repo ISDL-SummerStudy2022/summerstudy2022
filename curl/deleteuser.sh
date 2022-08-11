@@ -1,0 +1,1 @@
+curl -X POST -H 'Content-Type:application/json' -d '{"userID": 1}' localhost:8080/user/delete
